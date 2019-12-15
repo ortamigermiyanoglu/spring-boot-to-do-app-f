@@ -95,10 +95,7 @@ public class UserController {
     public String confirmUserAccount(Model model, @RequestParam("token")String confirmationToken) {
         ConfirmationToken token = confirmationTokenRepository.findByConfirmationToken(confirmationToken);
 
-        if(token != null)
-        {
-
-
+        if(token != null) {
             User user = userRepository.findByEmailIgnoreCase(token.getUser().getEmail());
             user.setEnabled(true);
             userRepository.save(user);
@@ -110,8 +107,7 @@ public class UserController {
 
             return "user/accountVerified";
         }
-        else
-        {
+        else {
             model.addAttribute("message","The link is invalid or broken!");
             return "user/error";
         }

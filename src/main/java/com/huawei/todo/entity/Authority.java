@@ -19,7 +19,6 @@ public class Authority {
     private String username;
     private String authority;
 
-    @OneToOne()
-    @JoinColumn(name = "username", insertable = false, updatable = false)
-    private User user;
+
+
 }

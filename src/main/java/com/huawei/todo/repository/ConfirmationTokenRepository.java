@@ -9,4 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @since 12/15/2019, Sun
  */
 public interface ConfirmationTokenRepository extends JpaRepository<ConfirmationToken, Integer> {
+    ConfirmationToken findByConfirmationToken(String confirmationToken);
 }

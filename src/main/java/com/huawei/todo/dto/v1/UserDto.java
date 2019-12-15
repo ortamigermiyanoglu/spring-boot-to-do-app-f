@@ -13,10 +13,13 @@ import java.util.List;
  */
 @Setter
 @Getter
-public class UserDto extends BaseEntityDto {
+public class UserDto {
+    private Integer id;
     private String username;
     private String password;
     private String fullName;
+    private String email;
+    private Boolean enabled;
 
     private List<TaskDto> tasks = new ArrayList<>();
 }

@@ -13,7 +13,8 @@ import java.util.List;
  */
 @Setter
 @Getter
-public class TaskDto extends BaseEntityDto{
+public class TaskDto {
+    private Integer id;
     private String name;
     private Integer userId;
 

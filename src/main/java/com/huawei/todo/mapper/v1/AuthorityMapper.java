@@ -11,6 +11,6 @@ import org.mapstruct.Mapper;
  */
 @Mapper
 public interface AuthorityMapper {
-    Authority dtoToEntity(AuthorityMapper authorityMapper);
+    Authority dtoToEntity(AuthorityDto authorityDto);
     AuthorityDto entityToDto(Authority authority);
 }

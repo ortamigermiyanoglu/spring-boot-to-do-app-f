@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Registration</title>
+    <script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+    <script th:src="@{/webjars/bootstrap/3.4.1/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.4.1/css/bootstrap.min.css}">
+</head>
+<body>
+
+<div class="container">
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading">User Registration</div>
+            <div class="panel-body">
+                <form th:action="@{/register}" th:object="${user}" method="POST">
+                    <input type="hidden" th:field="*{id}">
+
+                    <input type="text" th:field="*{username}" style="margin-bottom: 25px"
+                           class="form-control mb-4 col-4" placeholder="username">
+
+                    <input type="password" th:field="*{password}" style="margin-bottom: 25px"
+                           class="form-control mb-4 col-4" placeholder="password">
+                    <input type="text" th:field="*{email}" style="margin-bottom: 25px"
+                           class="form-control mb-4 col-4" placeholder="email">
+
+                    <input type="text" th:field="*{fullName}" style="margin-bottom: 25px"
+                           class="form-control mb-4 col-4" placeholder="full name">
+
+                    <button type="submit" class="btn btn-primary col-2">Register</button>
+
+                </form>
+
+                <hr>
+                <a th:href="@{/login}">Go to Login</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

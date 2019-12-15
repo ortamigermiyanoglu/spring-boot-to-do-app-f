@@ -10,11 +10,9 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 /**
@@ -39,6 +37,7 @@ public class TaskController {
     @GetMapping("/tasks")
     public String showTasks(Model model, Authentication authentication){
         UserDto userDto = userMapper.entityToDto(userRepository.findByUsername(authentication.getName()));
+        model.addAttribute("loggedUsername", userDto.getFullName());
         model.addAttribute("tasks",taskRepository.findByUser_Id(userDto.getId()).stream().map(taskMapper::entityToDto).collect(Collectors.toList()));
         return "task/task-index";
     }
@@ -46,6 +45,7 @@ public class TaskController {
     @GetMapping("/tasks/add")
     public String addTask(Model model, Authentication authentication){
         UserDto userDto = userMapper.entityToDto(userRepository.findByUsername(authentication.getName()));
+
         model.addAttribute("user", userDto);
         model.addAttribute("task", new TaskDto());
         return "task/task-form";
@@ -54,11 +54,16 @@ public class TaskController {
     @PostMapping("/tasks/save")
     public String addTask(@ModelAttribute("task") TaskDto taskDto, Authentication authentication){
         UserDto userDto = userMapper.entityToDto(userRepository.findByUsername(authentication.getName()));
-
         taskDto.setUserId(userDto.getId());
 
         taskRepository.save(taskMapper.dtoToEntity(taskDto));
 
+        return "redirect:/user/tasks";
+    }
+
+    @GetMapping("/tasks/{taskId}/delete")
+    public String deleteTask(@PathVariable Integer taskId){
+        taskRepository.deleteById(taskId);
         return "redirect:/user/tasks";
     }
 

@@ -61,7 +61,7 @@ public class UserController {
         else {
             String password = "{noop}"+user.getPassword();
             user.setPassword(password);
-            user.setEnabled(false);
+            user.setEnabled(true);
             User savedUser = userRepository.save(userMapper.dtoToEntity(user));
 
             ConfirmationTokenDto confirmationTokenDto = new ConfirmationTokenDto(userMapper.entityToDto(savedUser));

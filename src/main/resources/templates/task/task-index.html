@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>Task Page</title>
@@ -16,8 +17,14 @@
 <div class="container" style="padding-top: 5%;">
     <div class="panel-group">
         <div class="panel panel-primary">
-            <div class="panel-heading">Task List</div>
-            <div class="panel-body">
+            <div class="panel-heading">Task List<p style="float: right" th:text="${loggedUsername}"/></div>
+            <div class="panel-body" sec:authorize="hasRole('ROLE_UNVERIFIED')">
+                <p style="text-align: center;">Please confirm your email account to see the page content</p>
+                <p><a th:href="@{/logout}" style="float: right" class="btn btn-primary btn-sm">
+                    <span class="glyphicon glyphicon-log-out"></span> Log out
+                </a></p>
+            </div>
+            <div sec:authorize="hasRole('ROLE_VERIFIED')" class="panel-body">
                 <a th:href="@{'/user/tasks/add'}"
                    class="btn btn-primary btn-sm mr-5 mb-3">
                     Add Task
@@ -48,7 +55,9 @@
                     </tr>
                     </tbody>
                 </table>
-
+                <p><a th:href="@{/logout}" style="float: right" class="btn btn-primary btn-sm">
+                    <span class="glyphicon glyphicon-log-out"></span> Log out
+                </a></p>
             </div>
         </div>
     </div>

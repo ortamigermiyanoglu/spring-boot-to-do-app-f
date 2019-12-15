@@ -30,7 +30,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/register").permitAll()
                 .antMatchers("/confirm-account").permitAll()
                 .antMatchers("/login").permitAll()
-                .antMatchers("/user/**").hasRole("VERIFIED")
+                .antMatchers("/user/tasks").hasAnyRole("UNVERIFIED", "VERIFIED")
+                .antMatchers("/user/tasks/**").hasRole("VERIFIED")
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -39,7 +40,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .logout()
-                .logoutSuccessUrl("/my-login?logout").invalidateHttpSession(true)
+                .logoutSuccessUrl("/login?logout").invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID").permitAll(); // after logout then redirect to login page;
 
         http.csrf().disable();

@@ -47,3 +47,4 @@ CREATE TABLE TASK_UNITS (
        FOREIGN KEY(pre_task_unit_id) REFERENCES TASK_UNITS(id),
        PRIMARY KEY (id)
 );
+

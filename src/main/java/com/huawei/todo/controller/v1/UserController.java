@@ -122,10 +122,6 @@ public class UserController {
         return "user/login";
     }
 
-    @GetMapping("/test")
-    public String check(){
-        return "test";
-    }
 
 
 }

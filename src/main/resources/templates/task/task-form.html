@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Task Form</title>
+    <script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+    <script th:src="@{/webjars/bootstrap/3.4.1/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.4.1/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="container" style="padding-top: 5%;">
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Task Form</div>
+            <div class="panel-body">
+
+                <hr>
+
+                <!--/*@thymesVar id="task" type="com.huawei.todo.dto.v1.TaskDto"*/-->
+                <form th:action="@{'/user/tasks/save'}" th:object="${task}" method="POST">
+
+                    <input type="hidden" th:field="*{id}" />
+
+
+                    <input type="text" th:field="*{name}" style="margin-bottom: 25px"
+                           class="form-control mb-4 col-4" placeholder="task name">
+
+
+                    <button type="submit" class="btn btn-primary col-2">Save</button>
+
+                </form>
+
+                <hr>
+                <a th:href="@{'/user/tasks'}"
+                   class="btn btn-primary btn-sm mr-5 mb-3">
+                    Back To Task List
+                </a>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

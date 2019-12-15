@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Task Page</title>
+    <script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+    <script th:src="@{/webjars/bootstrap/3.4.1/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.4.1/css/bootstrap.min.css}">
+    <style>
+        .table td, th {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="container" style="padding-top: 5%;">
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Task List</div>
+            <div class="panel-body">
+                <a th:href="@{'/user/tasks/add'}"
+                   class="btn btn-primary btn-sm mr-5 mb-3">
+                    Add Task
+                </a>
+                <hr>
+
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th>Task ID</th>
+                        <th>Task Name</th>
+                        <th>View Task Units</th>
+                        <th>Delete Task</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:each="task : ${tasks}">
+
+                        <td th:text="${task.id}" />
+                        <td th:text="${task.name}" />
+                        <td>
+                            <a th:href="@{'/user/tasks/'+${task.id}+''}">View Task Units</a>
+                        </td>
+                        <td>
+                            <a th:href="@{'/user/tasks/'+${task.id}+'/delete'}">Delete Task</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

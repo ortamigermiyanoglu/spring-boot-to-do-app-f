@@ -116,4 +116,16 @@ public class UserController {
             return "user/error";
         }
     }
+
+    @GetMapping("/login")
+    public String showLogin(){
+        return "user/login";
+    }
+
+    @GetMapping("/test")
+    public String check(){
+        return "test";
+    }
+
+
 }

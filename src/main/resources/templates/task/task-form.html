@@ -11,10 +11,8 @@
 <div class="container" style="padding-top: 5%;">
     <div class="panel-group">
         <div class="panel panel-primary">
-            <div class="panel-heading">Task Form</div>
+            <div class="panel-heading">Task Form <p style="float: right" th:text="${loggedUsername}"/></div>
             <div class="panel-body">
-
-                <hr>
 
                 <!--/*@thymesVar id="task" type="com.huawei.todo.dto.v1.TaskDto"*/-->
                 <form th:action="@{'/user/tasks/save'}" th:object="${task}" method="POST">
@@ -26,14 +24,16 @@
                            class="form-control mb-4 col-4" placeholder="task name">
 
 
-                    <button type="submit" class="btn btn-primary col-2">Save</button>
+                    <button type="submit" class="btn btn-primary btn-sm col-2">Save</button>
 
                 </form>
 
                 <hr>
 
-                <hr>
-                <a th:href="@{/user/tasks}">Back To Task List</a>
+                <p><a th:href="@{/user/tasks}">Back To Task List</a>
+                    <a th:href="@{/logout}" style="float: right" class="btn btn-primary btn-sm">
+                    <span class="glyphicon glyphicon-log-out"></span> Log out
+                </a></p>
 
             </div>
         </div>

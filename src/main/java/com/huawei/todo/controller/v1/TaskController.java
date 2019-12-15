@@ -45,6 +45,7 @@ public class TaskController {
     @GetMapping("/tasks/add")
     public String addTask(Model model, Authentication authentication){
         UserDto userDto = userMapper.entityToDto(userRepository.findByUsername(authentication.getName()));
+        model.addAttribute("loggedUsername", userDto.getFullName());
 
         model.addAttribute("user", userDto);
         model.addAttribute("task", new TaskDto());

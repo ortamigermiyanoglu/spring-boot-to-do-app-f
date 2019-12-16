@@ -11,5 +11,5 @@ import java.util.List;
  * @since 12/15/2019, Sun
  */
 public interface TaskUnitRepository extends JpaRepository<TaskUnit, Integer> {
-    List<TaskUnit> findByTask_Id(Integer taskId);
+    List<TaskUnit> findByTaskId(Integer taskId);
 }

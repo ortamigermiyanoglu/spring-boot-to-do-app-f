@@ -1,10 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Task Unit List</title>
+    <script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+    <script th:src="@{/webjars/bootstrap/3.4.1/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.4.1/css/bootstrap.min.css}">
+    <style>
+        .table td, th {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
+<div class="container" style="padding-top: 5%;">
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Task List<p style="float: right" th:text="${loggedUsername}"/></div>
+            <div sec:authorize="hasRole('ROLE_VERIFIED')" class="panel-body">
+                <a th:href="@{'/user/tasks/'+${taskId}+'/add'}"
+                   class="btn btn-primary btn-sm mr-5 mb-3">
+                    Add Task Unit
+                </a>
+                <hr>
 
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th>Unit ID</th>
+                        <th>Unit Name</th>
+                        <th>Deadline</th>
+                        <th>Status</th>
+                        <th>View</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    <tr th:each="taskUnit : ${taskUnits}">
+                        <td th:text="${taskUnit.id}"/>
+                        <td th:text="${taskUnit.name}"/>
+                        <td th:text="${taskUnit.deadline}"/>
+                        <td th:text="${taskUnit.status}"/>
+                        <td>
+                            <a th:href="@{'/user/tasks/'+${taskId}+'/unit/'+${taskUnit.id}+'/view'}">View Task Unit</a>
+                        </td>
+                        <td>
+                            <a th:href="@{'/user/tasks/'+${taskId}+'/unit/'+${taskUnit.id}+'/update'}">Update Task Unit</a>
+                        </td>
+                        <td>
+                            <a th:href="@{'/user/tasks/'+${taskId}+'/delete/'+${taskUnit.id}+'/delete'}"    onclick="if (!(confirm('Are you sure you want to delete this task unit?'))) return false" >Delete Task</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <p><a th:href="@{/logout}" style="float: right" class="btn btn-primary btn-sm">
+                    <span class="glyphicon glyphicon-log-out"></span> Log out
+                </a></p>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

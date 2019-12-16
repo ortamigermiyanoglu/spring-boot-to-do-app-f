@@ -3,6 +3,8 @@ package com.huawei.todo.dto.v1;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -15,7 +17,7 @@ import java.util.Date;
 public class TaskUnitDto {
     private Integer id;
     private String name;
-    private String description;
+    private Date createdDate = java.sql.Date.valueOf(LocalDate.now());
     private Date deadline;
     private String status;
     private Integer parentTaskUnitId;

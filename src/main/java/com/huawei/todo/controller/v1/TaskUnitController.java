@@ -11,10 +11,11 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -55,5 +56,33 @@ public class TaskUnitController {
         model.addAttribute("taskUnits", taskUnits);
         model.addAttribute("taskId", taskId);
         return "task-unit/task-unit-index";
+    }
+
+
+    @GetMapping("/{taskId}/add")
+    public String addTaskUnit(@PathVariable Integer taskId, Model model){
+        TaskUnitDto taskUnitDto = new TaskUnitDto();
+        taskUnitDto.setTaskId(taskId);
+        taskUnitDto.setCreatedDate(java.sql.Date.valueOf(LocalDate.now()));
+        List<TaskUnitDto> candidateParentTaskUnits = taskUnitRepository.findByTaskId(taskId).stream().map(taskUnitMapper::entityToDto).collect(Collectors.toList());
+
+        List<TaskUnitDto> realPossibleParentTaskUnits = new ArrayList<>();
+        for (TaskUnitDto taskUnitDto1 : candidateParentTaskUnits){
+            if (taskUnitDto1.getDeadline()!=null && (taskUnitDto1.getDeadline().compareTo(taskUnitDto.getCreatedDate()) > 0 )){
+                realPossibleParentTaskUnits.add(taskUnitDto1);
+            }
+        }
+
+
+        model.addAttribute("parentTaskUnits", realPossibleParentTaskUnits);
+        model.addAttribute("showOtherOptions", false);
+        model.addAttribute("taskUnit", taskUnitDto);
+        return "task-unit/task-unit-form";
+    }
+
+
+    @PostMapping("/{taskId}/save")
+    public String addTaskUnit(@PathVariable Integer taskId,@ModelAttribute TaskUnitDto taskUnitDto, Model model){
+        return null;
     }
 }

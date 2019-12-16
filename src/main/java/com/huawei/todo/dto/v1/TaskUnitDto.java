@@ -17,7 +17,8 @@ import java.util.Date;
 public class TaskUnitDto {
     private Integer id;
     private String name;
-    private Date createdDate = java.sql.Date.valueOf(LocalDate.now());
+    private String description;
+    private Date createdDate;
     private Date deadline;
     private String status;
     private Integer parentTaskUnitId;

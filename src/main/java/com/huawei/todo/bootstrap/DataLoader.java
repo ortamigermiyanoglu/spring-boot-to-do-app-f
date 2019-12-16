@@ -10,6 +10,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -108,6 +109,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         ConfirmationToken confirmationToken = new ConfirmationToken();
         confirmationToken.setId(1);
         confirmationToken.setUserId(1);
+        confirmationToken.setCreatedDate(java.sql.Date.valueOf(LocalDate.now()));
         confirmationToken.setConfirmationToken("abcdef");
         return confirmationToken;
     }
@@ -121,7 +123,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         taskUnit.setName("list task unit");
         taskUnit.setDescription("create bootstrap");
         taskUnit.setStatus("Not Complete");
-        taskUnit.setDeadline(new Date(2019,12,16));
+        taskUnit.setDeadline(java.sql.Date.valueOf(LocalDate.now()));
         taskUnit.setTaskId(1);
 
         TaskUnit taskUnit1 = new TaskUnit();
@@ -129,7 +131,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         taskUnit1.setName("create html file");
         taskUnit1.setStatus("Not Complete");
         taskUnit1.setDescription("use bootstrap javascript html");
-        taskUnit1.setDeadline(new Date(2019,12,17));
+        taskUnit1.setDeadline(java.sql.Date.valueOf(LocalDate.now()));
         taskUnit1.setTaskId(1);
 
 
@@ -138,7 +140,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         taskUnit2.setName("create controller");
         taskUnit2.setStatus("Not Complete");
         taskUnit2.setDescription("add attributes");
-        taskUnit2.setDeadline(new Date(2019,12,18));
+        taskUnit2.setDeadline(java.sql.Date.valueOf(LocalDate.now()));
         taskUnit2.setTaskId(1);
 
         taskUnits.add(taskUnit);

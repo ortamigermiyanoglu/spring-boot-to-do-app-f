@@ -1,11 +1,9 @@
 package com.huawei.todo.dto.v1;
 
-import com.huawei.todo.entity.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.UUID;
 

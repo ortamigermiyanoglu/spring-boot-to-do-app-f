@@ -2,13 +2,10 @@ package com.huawei.todo.rest;
 
 import com.huawei.todo.dto.v1.TaskUnitDto;
 import com.huawei.todo.entity.ResponseEntity;
-import com.huawei.todo.entity.TaskUnit;
-import com.huawei.todo.mapper.v1.TaskMapper;
 import com.huawei.todo.mapper.v1.TaskUnitMapper;
 import com.huawei.todo.repository.TaskUnitRepository;
 import org.mapstruct.factory.Mappers;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

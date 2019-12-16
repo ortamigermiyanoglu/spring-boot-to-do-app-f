@@ -8,11 +8,15 @@ import com.huawei.todo.mapper.v1.UserMapper;
 import com.huawei.todo.repository.TaskUnitRepository;
 import com.huawei.todo.repository.UserRepository;
 import org.mapstruct.factory.Mappers;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -40,6 +44,11 @@ public class TaskUnitController {
         this.userRepository = userRepository;
     }
 
+    @InitBinder
+    public void initBinder(WebDataBinder binder){
+        binder.registerCustomEditor(       Date.class,
+                new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true, 10));
+    }
 
     @GetMapping("/{taskId}")
     public String showTaskUnits(@PathVariable Integer taskId, Authentication authentication, Model model){
@@ -67,6 +76,7 @@ public class TaskUnitController {
         List<TaskUnitDto> candidateParentTaskUnits = taskUnitRepository.findByTaskId(taskId).stream().map(taskUnitMapper::entityToDto).collect(Collectors.toList());
 
         List<TaskUnitDto> realPossibleParentTaskUnits = new ArrayList<>();
+
         for (TaskUnitDto taskUnitDto1 : candidateParentTaskUnits){
             if (taskUnitDto1.getDeadline()!=null && (taskUnitDto1.getDeadline().compareTo(taskUnitDto.getCreatedDate()) > 0 )){
                 realPossibleParentTaskUnits.add(taskUnitDto1);
@@ -82,7 +92,9 @@ public class TaskUnitController {
 
 
     @PostMapping("/{taskId}/save")
-    public String addTaskUnit(@PathVariable Integer taskId,@ModelAttribute TaskUnitDto taskUnitDto, Model model){
-        return null;
+    public String addTaskUnit(@PathVariable Integer taskId,@ModelAttribute TaskUnitDto taskUnitDto, Model model) throws ParseException {
+
+        taskUnitRepository.save(taskUnitMapper.dtoToEntity(taskUnitDto));
+        return "redirect:/user/tasks/"+taskId;
     }
 }

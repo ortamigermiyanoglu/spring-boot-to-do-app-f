@@ -15,7 +15,7 @@
             <div class="panel-body">
 
                 <!--/*@thymesVar id="task" type="com.huawei.todo.dto.v1.TaskUnitDto"*/-->
-                <form th:action="@{'/user/tasks/'+${taskId}+'save'}" th:object="${taskUnit}" method="POST">
+                <form th:action="@{'/user/tasks/'+${taskId}+'/save'}" th:object="${taskUnit}" method="POST">
 
                     <input type="hidden" th:field="*{id}" />
 
@@ -25,6 +25,25 @@
 
                     <textarea th:field="*{description}" style="margin-bottom: 25px" class="form-control mb-4 col-4" rows="2" placeholder="description"/>
 
+                    <select class="form-control mb-4 col-4" style="margin-bottom: 25px" th:field="*{status}">
+                        <option value="Status" disabled>Status</option>
+                        <option th:value="'Not Complete'" th:text="'Not Complete'"/>
+                        <option th:if="${showOtherOptions}" th:value="'Complete'" th:text="'Complete'"/>
+                        <option th:if="${showOtherOptions}" th:value="'Expired'" th:text="'Expired'"/>
+                    </select>
+
+                    <div style="margin-bottom: 25px" >
+                        <label>Deadline</label>
+                        <input type='date'  th:field="*{deadline}" />
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                    </div>
+
+                    <select style="margin-bottom: 25px" class="form-control mb-4 col-4"  th:field="*{parentTaskUnitId}">
+                        <option value="Choose Parent Task Unit" disabled>Choose Parent Task Unit</option>
+                        <option th:each="candidateParentTaskUnitId : ${parentTaskUnits}" th:value="${candidateParentTaskUnitId.id}" th:text="${candidateParentTaskUnitId.name}">
+                        </option>
+                    </select>
 
 
                     <button type="submit" class="btn btn-primary btn-sm col-2">Save</button>

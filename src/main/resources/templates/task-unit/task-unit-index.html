@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <title>Task Unit List</title>
     <script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+    <script src="/js/orderBy.js"></script>
+    <script src="/js/filterBy.js"></script>
+
     <script th:src="@{/webjars/bootstrap/3.4.1/js/bootstrap.min.js}"></script>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.4.1/css/bootstrap.min.css}">
     <style>
@@ -19,36 +22,33 @@
         <div class="panel panel-primary">
             <div class="panel-heading">Task List<p style="float: right" th:text="${loggedUsername}"/></div>
 
-            <form style="margin-left: 25px; margin-right: 50px" class="form-inline">
                 <div class="form-group">
                     <label>Filter By Status</label>
                     <select id="filterr" class="form-control">
-                        <option value="0">All Statuses</option>
-                        <option value="Complete">Complete</option>
-                        <option value="Not Complete">Not Complete</option>
-                        <option value="Expired">Expired</option>
+                        <option value="complete">Complete</option>
+                        <option value="notComplete">Not Complete</option>
+                        <option value="expired">Expired</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label>Order By </label>
                     <select id="orderr" class="form-control">
-                        <option value="Creation Date">Creation Date</option>
-                        <option value="Deadline">Deadline</option>
-                        <option value="Status">Status</option>
-                        <option value="Name">Name</option>
+                        <option value="createdDate">Creation Date</option>
+                        <option value="deadline">Deadline</option>
+                        <option value="status">Status</option>
+                        <option value="name">Name</option>
                     </select>
                 </div>
-            </form>
             <hr>
             <div sec:authorize="hasRole('ROLE_VERIFIED')" class="panel-body">
                 <a th:href="@{'/user/tasks/'+${taskId}+'/add'}"
-                   class="btn btn-primary btn-sm mr-5 mb-3">
+                   class="btn btn-primary btn-sm">
                     Add Task Unit
                 </a>
                 <hr>
 
                 <table class="table table-bordered table-striped">
-                    <thead class="thead-dark">
+                    <thead id="theadd" class="thead-dark">
                     <tr>
                         <th>Unit ID</th>
                         <th>Unit Name</th>
@@ -60,7 +60,7 @@
                     </tr>
                     </thead>
 
-                    <tbody th:id="resultDiv">
+                    <tbody id="resultDiv">
 
                     <tr th:each="taskUnit : ${taskUnits}">
                         <td th:text="${taskUnit.id}"/>

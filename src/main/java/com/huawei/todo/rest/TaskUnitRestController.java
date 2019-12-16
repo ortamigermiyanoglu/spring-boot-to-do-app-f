@@ -68,7 +68,7 @@ public class TaskUnitRestController {
     }
 
     @GetMapping("/filterBy/complete")
-    public ResponseEntity<TaskUnitDto> filterComplete(@PathVariable String filter){
+    public ResponseEntity<TaskUnitDto> filterComplete(){
         List<TaskUnitDto> taskUnitDtoList = taskUnitRepository.findByStatusIgnoreCase("Complete").stream()
                 .map(taskUnitMapper::entityToDto).collect(Collectors.toList());
 
@@ -76,7 +76,7 @@ public class TaskUnitRestController {
     }
 
     @GetMapping("/filterBy/notComplete")
-    public ResponseEntity<TaskUnitDto> filterNotComplete(@PathVariable String filter){
+    public ResponseEntity<TaskUnitDto> filterNotComplete(){
         List<TaskUnitDto> taskUnitDtoList = taskUnitRepository.findByStatusIgnoreCase("Not Complete").stream()
                 .map(taskUnitMapper::entityToDto).collect(Collectors.toList());
 
@@ -84,7 +84,7 @@ public class TaskUnitRestController {
     }
 
     @GetMapping("/filterBy/expired")
-    public ResponseEntity<TaskUnitDto> filterExpired(@PathVariable String filter){
+    public ResponseEntity<TaskUnitDto> filterExpired(){
         List<TaskUnitDto> taskUnitDtoList = taskUnitRepository.findByStatusIgnoreCase("Expired").stream()
                 .map(taskUnitMapper::entityToDto).collect(Collectors.toList());
 

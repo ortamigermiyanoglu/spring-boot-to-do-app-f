@@ -12,4 +12,6 @@ import java.util.List;
  */
 public interface TaskUnitRepository extends JpaRepository<TaskUnit, Integer> {
     List<TaskUnit> findByTaskId(Integer taskId);
+    List<TaskUnit> findByStatus(String status);
+    List<TaskUnit> findAllByOrderByCreatedDate();
 }

@@ -11,17 +11,19 @@ import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
+ * this component populates data on embedded h2 db on startup
+ *  you can log in with username: sumutella password:123
+ * as you know, h2 database lost its content whenever the app restarted / deployed
+ *
  * @author sumutella
  * @time 10:18 PM
  * @since 12/15/2019, Sun
  */
-// this component populates data on embedded h2 db if you want to use the program without registration
+
 @Component
 public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
@@ -123,7 +125,8 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         taskUnit.setName("list task unit");
         taskUnit.setDescription("create bootstrap");
         taskUnit.setStatus("Not Complete");
-        taskUnit.setDeadline(java.sql.Date.valueOf(LocalDate.now()));
+        taskUnit.setCreatedDate(java.sql.Date.valueOf(LocalDate.of(2019,12,12)));
+        taskUnit.setDeadline(java.sql.Date.valueOf(LocalDate.of(2019,12,17)));
         taskUnit.setTaskId(1);
 
         TaskUnit taskUnit1 = new TaskUnit();
@@ -131,7 +134,8 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         taskUnit1.setName("create html file");
         taskUnit1.setStatus("Not Complete");
         taskUnit1.setDescription("use bootstrap javascript html");
-        taskUnit1.setDeadline(java.sql.Date.valueOf(LocalDate.now()));
+        taskUnit1.setCreatedDate(java.sql.Date.valueOf(LocalDate.of(2019,12,9)));
+        taskUnit1.setDeadline(java.sql.Date.valueOf(LocalDate.of(2019,12,19)));
         taskUnit1.setTaskId(1);
 
 
@@ -140,7 +144,8 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         taskUnit2.setName("create controller");
         taskUnit2.setStatus("Not Complete");
         taskUnit2.setDescription("add attributes");
-        taskUnit2.setDeadline(java.sql.Date.valueOf(LocalDate.now()));
+        taskUnit2.setCreatedDate(java.sql.Date.valueOf(LocalDate.of(2019,12,9)));
+        taskUnit2.setDeadline(java.sql.Date.valueOf(LocalDate.of(2019,12,11)));
         taskUnit2.setTaskId(1);
 
         taskUnits.add(taskUnit);

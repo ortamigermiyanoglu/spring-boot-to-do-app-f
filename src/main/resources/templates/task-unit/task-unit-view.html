@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Task Form</title>
+    <script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+    <script th:src="@{/webjars/bootstrap/3.4.1/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.4.1/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="container" style="padding-top: 5%;">
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Task Unit Form <p style="float: right" th:text="${loggedUsername}"/></div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <h5>Task Unit ID:</h5>
+                    </div>
+                    <div class="col-md-3">
+                        <p th:text="${taskUnit.id}"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <h5>Task Unit Name:</h5>
+                    </div>
+                    <div class="col-md-3">
+                        <p th:text="${taskUnit.name}"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <h5>Description:</h5>
+                    </div>
+                    <div class="col-md-3">
+                        <p th:text="${taskUnit.description}"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <h5>Created Date:</h5>
+                    </div>
+                    <div class="col-md-3">
+                        <p th:text="${taskUnit.createdDate}"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <h5>Deadline:</h5>
+                    </div>
+                    <div class="col-md-3">
+                        <p th:text="${taskUnit.deadline}"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <h5>Status:</h5>
+                    </div>
+                    <div class="col-md-3">
+                        <p th:text="${taskUnit.status}">30 min</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <h5>Parent Task Unit Name:</h5>
+                    </div>
+                    <div class="col-md-3">
+                        <p th:text="${parentTasUnitName}"></p>
+                    </div>
+                </div>
+
+                <p><a th:href="@{'/user/tasks/'+${taskId}+''}">Back To Task Unit List</a>
+                    <a th:href="@{/logout}" style="float: right" class="btn btn-primary btn-sm">
+                        <span class="glyphicon glyphicon-log-out"></span> Log out
+                    </a></p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

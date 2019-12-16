@@ -7,6 +7,9 @@
 <body>
 <div style="text-align: center;">
     <span th:text="'A verification email has been sent to: ' + ${emailId}"></span>
+    <span th:text="'Verify your email, then go to login page'"></span>
+    <hr>
+    <span><a th:href="@{/login}">Go to Login</a></span>
 </div>
 </body>
 </html>

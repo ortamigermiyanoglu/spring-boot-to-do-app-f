@@ -18,6 +18,28 @@
     <div class="panel-group">
         <div class="panel panel-primary">
             <div class="panel-heading">Task List<p style="float: right" th:text="${loggedUsername}"/></div>
+
+            <form style="margin-left: 25px; margin-right: 50px" class="form-inline">
+                <div class="form-group">
+                    <label>Filter By Status</label>
+                    <select id="filterr" class="form-control">
+                        <option value="0">All Statuses</option>
+                        <option value="Complete">Complete</option>
+                        <option value="Not Complete">Not Complete</option>
+                        <option value="Expired">Expired</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Order By </label>
+                    <select id="orderr" class="form-control">
+                        <option value="Creation Date">Creation Date</option>
+                        <option value="Deadline">Deadline</option>
+                        <option value="Status">Status</option>
+                        <option value="Name">Name</option>
+                    </select>
+                </div>
+            </form>
+            <hr>
             <div sec:authorize="hasRole('ROLE_VERIFIED')" class="panel-body">
                 <a th:href="@{'/user/tasks/'+${taskId}+'/add'}"
                    class="btn btn-primary btn-sm mr-5 mb-3">
@@ -33,12 +55,12 @@
                         <th>Deadline</th>
                         <th>Status</th>
                         <th>View</th>
-                        <th>Update</th>
+                        <th>Mark as Complete</th>
                         <th>Delete</th>
                     </tr>
                     </thead>
 
-                    <tbody>
+                    <tbody th:id="resultDiv">
 
                     <tr th:each="taskUnit : ${taskUnits}">
                         <td th:text="${taskUnit.id}"/>
@@ -46,13 +68,13 @@
                         <td th:text="${taskUnit.deadline}"/>
                         <td th:text="${taskUnit.status}"/>
                         <td>
-                            <a th:href="@{'/user/tasks/'+${taskId}+'/unit/'+${taskUnit.id}+'/view'}">View Task Unit</a>
+                            <a th:href="@{'/user/tasks/'+${taskId}+'/unit/'+${taskUnit.id}+'/view'}">View</a>
                         </td>
                         <td>
-                            <a th:href="@{'/user/tasks/'+${taskId}+'/unit/'+${taskUnit.id}+'/update'}">Update Task Unit</a>
+                            <a th:if="${taskUnit.status != 'Complete'}" th:href="@{'/user/tasks/'+${taskId}+'/unit/'+${taskUnit.id}+'/update'}">mark</a>
                         </td>
                         <td>
-                            <a th:href="@{'/user/tasks/'+${taskId}+'/delete/'+${taskUnit.id}+'/delete'}"    onclick="if (!(confirm('Are you sure you want to delete this task unit?'))) return false" >Delete Task</a>
+                            <a th:href="@{'/user/tasks/'+${taskId}+'/delete/'+${taskUnit.id}+''}"    onclick="if (!(confirm('Are you sure you want to delete this task unit?'))) return false" >Delete</a>
                         </td>
                     </tr>
                     </tbody>

@@ -3,8 +3,6 @@ package com.huawei.todo.dto.v1;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -24,5 +22,4 @@ public class TaskUnitDto {
     private Integer parentTaskUnitId;
     private Integer taskId;
 
-    private TaskUnitDto subTaskUnit;
 }

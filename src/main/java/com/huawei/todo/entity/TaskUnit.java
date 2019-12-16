@@ -4,9 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author sumutella
@@ -20,7 +20,6 @@ import java.util.Date;
 public class TaskUnit extends BaseEntity {
     private String name;
     private String description;
-    @Temporal(TemporalType.DATE)
     @Column(name = "created_date")
     private Date createdDate;
     private Date deadline;
@@ -31,12 +30,13 @@ public class TaskUnit extends BaseEntity {
     private Integer parentTaskUnitId;
 
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "pre_task_unit_id", insertable = false, updatable = false)
     private TaskUnit parentTaskUnit;
 
-    @OneToOne(mappedBy = "parentTaskUnit")
-    private TaskUnit subTaskUnit;
+    @OneToMany(mappedBy = "parentTaskUnit", cascade = CascadeType.ALL)
+    private List<TaskUnit> childrenTaskUnits = new ArrayList<>();
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "task_id", insertable = false, updatable = false)

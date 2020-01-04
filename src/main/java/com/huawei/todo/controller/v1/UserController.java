@@ -80,7 +80,7 @@ public class UserController {
             mailMessage.setSubject("Complete Registration!");
             mailMessage.setFrom("semirkurtt@gmail.com");
             mailMessage.setText("To confirm your account, please click here : "
-                    +"http://localhost:8080/confirm-account?token="+confirmationTokenDto.getConfirmationToken());
+                    +"https://to-do-app-sumutella.herokuapp.com/confirm-account?token="+confirmationTokenDto.getConfirmationToken());
 
             emailSenderService.sendEmail(mailMessage);
 

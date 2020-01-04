@@ -17,7 +17,7 @@ $( document ).ready(function() {
     function ajaxGet(filterCriteria){
         $.ajax({
             type : "GET",
-            url : "http://localhost:8080/api/v1/user/task/taskUnit/filterBy/"+filterCriteria,
+            url : "https://to-do-app-sumutella.herokuapp.com/api/v1/user/task/taskUnit/filterBy/"+filterCriteria,
             success: function(result){
                 if(result.status === "OK"){
                     $('#theadd').append("<tr>"+
